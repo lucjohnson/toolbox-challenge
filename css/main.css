@@ -5,7 +5,8 @@
 body {
 	/*font-family: 'Alfa Slab One', cursive; */
 	font-family: 'Raleway', sans-serif;
-/*	background-image: url('../img/122H.jpg');
+/*	text-shadow: 2px 2px #ffffff;
+	background-image: url('../img/122H.jpg');
 	background-size: cover;
 	background-attachment: fixed;*/
 }
@@ -15,14 +16,14 @@ body {
 }*/
 
 img {
-	border: 5px solid black;
+	border: 5px solid #ffffff;
 }
 
 img:hover {
-	border: 5px solid white;
+	border: 5px solid #4b2e83;
 }
 
-.selected {
-	border-color: red;
+.matched {
+	border-color: #b7a57a;
 }
 
