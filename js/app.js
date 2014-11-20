@@ -10,14 +10,16 @@ var shuffledFullSet = _.shuffle(fullSet);
 function populateRow(start, end) {
 	for (var i = start; i < end; i++) {
 		var newTile = $(document.createElement('img'));
+		var tileNumber = i;
+		newTile.data('tileNumber', tileNumber);
 		var back = 'img/tile-back.png';
 		newTile.data('backImage', back);
 		newTile.attr('src', 'img/tile-back.png')
 		var front = shuffledFullSet[i]["image"];
 		newTile.data('frontImage', front);
-		// newTile.attr('width', '210px');
+		newTile.attr('width', '210px');
 		// newTile.attr('width', $('#game-board').width() / 4 - 30);
-		newTile.attr('height', $(document).height() / 4 - 30);
+		// newTile.attr('height', $(document).height() / 4 - 30);
 		gameBoard.append(newTile);
 	}
 }
@@ -45,9 +47,6 @@ $('#game-board img').click(function() {
 	clickedImages++;
 
 	if (clickedImages == 1) {
-	// var clickedImage = $(this);
-	// var tileData = clickedImage.data('frontImage');
-	// clickedImage.attr('src', tileData);
 		firstImage = $(this);
 		firstImageData = firstImage.data('frontImage');
 		firstImage.attr('src', firstImageData);
@@ -58,10 +57,9 @@ $('#game-board img').click(function() {
 		secondImage.attr('src', secondImageData);
 		console.log(secondImageData);
 	}
-	console.log(firstImageData);
-	console.log(secondImageData);
 
-	if (firstImageData === secondImageData) {
+	if (firstImage.data('frontImage') === secondImage.data('frontImage') 
+		&& firstImage.data('tileNumber') != secondImage.data('tileNumber')) {
 		console.log("match");
 		clickedImages = 0;
 		firstImage.addClass('matched');
