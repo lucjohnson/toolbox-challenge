@@ -7,10 +7,24 @@
 		<link rel="icon" href="img/favicon.ico">
 	</head>
 	<body>
-		<main class="container-fluid text-center">
-	        <section class="col-md-8 col-sm-12" id="game-board">
-	            <h1>Memory Game Board</h1>
-	        </section>
+		<main class="container-fluid">
+	        <div class="col-md-6 col-sm-12" id="game-board">
+	            <h1 id="header">Memory Game Board</h1>
+	            <div id="row1"></div>
+	            <div id="row2"></div>
+	            <div id="row3"></div>
+	            <div id="row4"></div>
+	        </div>
+	        <div class="col-md-3 col-sm-12" id="stats">
+	        	<h2>Timer</h2>
+	        		<p id="timer">0</p>
+	        	<h2>Matches Made</h2>
+	        		<p id="matches">0</p>
+	        	<h2>Matches Left</h2>
+	        		<p id="remaining">8</p>
+	        	<h2>Incorrect Attempts</h2>
+	        		<p id="incorrect">0</p>
+	        </div>
     	</main>
         <script src="js/jquery-2.1.1.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>

@@ -9,6 +9,8 @@ body {
 	background-image: url('../img/122H.jpg');
 	background-size: cover;
 	background-attachment: fixed;*/
+	text-align: center;
+	font-size: 16px;
 }
 
 /*#game-board {
@@ -27,3 +29,28 @@ img:hover {
 	border-color: #b7a57a;
 }
 
+#stats {
+	padding-top: 10%;
+}
+
+/*#stats h2 {
+	text-decoration: underline;
+	font-weight: bold;
+}*/
+
+#stats p {
+	font-family: 'Calibri';
+	font-size: 200%;
+}
+
+@media (max-width: 992px) {
+	#stats {
+		padding-top: 0%;
+		padding-left: 1em;
+		text-align: left;
+		font-size: 50%;
+	}
+	h1 h2 {
+		font-size: 50%;
+	}
+}
