@@ -101,26 +101,33 @@ if (clickedImages <= 2) {
 		} else if (clickedImages == 2 && !firstImage.hasClass('matched')
 				&& !secondImage.hasClass('matched')) {
 			// combine setTimeout functions
-			setTimeout(function() {firstImage.attr('src', 'img/tile-back.png')}, 1000);
-			setTimeout(function() {secondImage.attr('src', 'img/tile-back.png')}, 1000);
+			setTimeout(function() {
+				firstImage.attr('src', 'img/tile-back.png');
+				secondImage.attr('src', 'img/tile-back.png');
+				clickedImages = 0;
+			}, 1000);
+			// setTimeout(function() {firstImage.attr('src', 'img/tile-back.png')}, 1000);
+			// setTimeout(function() {secondImage.attr('src', 'img/tile-back.png')}, 1000);
 			firstImageData = firstImage.data('backImage');
 			secondImageData = secondImage.data('backImage');
-			setTimeout(function() {clickedImages = 0;}, 1000);
+			// setTimeout(function() {clickedImages = 0;}, 1000);
 			incorrect++;
 		//might be able to get rid of this if statement too	
-		} else if (clickedImages == 2 && (firstImage.hasClass('matched') || secondImage.hasClass('matched'))) {
-			clickedImages = 0;
-		}
+		} //else if (clickedImages == 2 && (firstImage.hasClass('matched') || secondImage.hasClass('matched'))) {
+		// 	clickedImages = 0;
+		// }
 		$('#matches').text(matches);
 		$('#remaining').text(remaining);
 		$('#incorrect').text(incorrect);		
 	});
 }
 
-var startTime = _.now();
-setInterval(function() {
-	$('#timer').text(Math.floor((_.now() - startTime) / 1000));
-}, 1000);
+$('#game-board').one("click", function () {
+	var startTime = _.now();
+	var time = setInterval(function() {
+		$('#timer').text(Math.floor((_.now() - startTime) / 1000));
+	}, 1000);
+});
 
 // $(onReady);
 
