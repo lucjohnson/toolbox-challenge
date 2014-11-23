@@ -1,5 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Orbitron);
 @import url(http://fonts.googleapis.com/css?family=Raleway);
+@import url(http://fonts.googleapis.com/css?family=Michroma);
 
 body {
 	font-family: 'Raleway', sans-serif;
@@ -11,8 +12,17 @@ body {
 }
 
 h1 {
-	font-size: 300%;
-	font-family: 'Orbitron', sans-serif;
+	font-family: 'Michroma', sans-serif;
+	font-size: 48px;
+}
+
+#game-board {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#title {
+	padding-bottom: .5em;
 }
 
 .btn-primary {
@@ -27,7 +37,6 @@ h1 {
 
 #totalGame {
 	background-color: rgba(255,255,255,0.8);
-	padding-bottom: 1.3em;
 }
 
 img {
@@ -50,14 +59,23 @@ img:hover {
 
 #stats p {
 	font-family: 'Orbitron', sans-serif;
-	font-size: 200%;
+	font-size: 175%;
 }
 
 @media (max-width: 992px) {
-	#stats {
-		font-size: 50%;
+	h1 {
+		font-size: 200%;
 	}
-	h1 h2 {
-		font-size: 50%;
+
+	h2 {
+		font-size: 14px;
+	}
+
+	#winner-modal {
+		font-size: 16px;
+	}
+
+	#stats {
+		padding-top: 5%;
 	}
 }

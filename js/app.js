@@ -17,25 +17,37 @@ $(document).ready(function () {
 
 	$('#play-again').click(function() {
 		location.reload(true);
+	});
+
+	var imgWidth;
+	var imgHeight;
+
+	function setWidth() {
+		var gameWidth = $('#game-board').width();
+		imgWidth = gameWidth / 4 - 40;
+	}
+
+	function setHeight() {
+		var windowHeight = $(window).height();
+		$('#game-board').css('height', windowHeight);
+		imgHeight = windowHeight / 4 - 30;
+	}
+
+	setWidth();
+	setHeight();
+
+	$(window).resize(function() {
+		setWidth();
+		setHeight();
+		if ($(window).width() > $(window).height()) {
+			$('img').css('width', imgWidth);
+			$('img').css('height', auto);
+		} else if ($(window).height() > $(window).width()) {
+			$('img').css('height', imgHeight);
+			$('img').css('width', auto);
+		}
 	})
 
-	// function setHeight () {
-	// 	var windowHeight = $(window).height();
-	// 	$('body').css('height', windowHeight);
-	// }
-
-	// function setWidth () {
-	// 	var gameWidth = $('#game-board').width();
-	// 	$('#game-board img').css('width', gameWidth / 4);
-	// }
-
-	// setHeight();
-	// setWidth();
-
-	// console.log(shuffledFullSet);
-
-	//maybe add image size param, and size based on window size
-	//remember the gameBoard is a square so consider that when sizing 
 	function populateRow(start, end, row) {
 		for (var i = start; i < end; i++) {
 			var newTile = $(document.createElement('img'));
@@ -46,16 +58,14 @@ $(document).ready(function () {
 			newTile.attr('src', 'img/tile-back.png')
 			var front = shuffledFullSet[i]["image"];
 			newTile.data('frontImage', front);
-			newTile.attr('width', '175px');
-			// newTile.attr('width', $('#game-board').width() / 4 - 30);
-			// newTile.attr('height', $('body').height() / 4 - $('#header').height());
+			if ($(window).width() > $(window).height()) {
+				newTile.attr('width', imgWidth);
+			} else {
+				newTile.attr('height', imgHeight);
+			}
 			row.append(newTile);
 		}
 	}
-
-	// var gameWidth = $('#game-board').width();
-	// console.log(gameWidth);
-	// $('#game-board img').css("width", gameWidth);
 
 	populateRow(0, 4, row1);
 	populateRow(4, 8, row2);
@@ -79,17 +89,19 @@ $(document).ready(function () {
 				firstImage = $(this);
 				if (firstImage.hasClass('matched')) {
 					clickedImages--;
-				} //else?
-				firstImageData = firstImage.data('frontImage');
-				firstImage.attr('src', firstImageData);
+				} else {
+					firstImageData = firstImage.data('frontImage');
+					firstImage.attr('src', firstImageData);
+				}
 			} else if (clickedImages == 2) {
 				secondImage = $(this);
 				if (secondImage.hasClass('matched') 
 					|| firstImage.data('tileNumber') == secondImage.data('tileNumber')) {
 					clickedImages--;
-				} //else?
-				secondImageData = secondImage.data('frontImage');
-				secondImage.attr('src', secondImageData);
+				} else {
+					secondImageData = secondImage.data('frontImage');
+					secondImage.attr('src', secondImageData);
+				}
 			}
 
 			if (firstImageData == secondImageData 
@@ -138,7 +150,6 @@ $(document).ready(function () {
 	$('#rules').click(function() {
 		$('#rules').popover('show');
 	});
-});
-// $(onReady);
+}); // $(onReady);
 
 
