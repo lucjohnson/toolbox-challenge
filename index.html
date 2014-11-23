@@ -8,28 +8,51 @@
 	</head>
 	<body>
 		<main class="container-fluid">
-	        <div class="col-md-6 col-sm-12" id="game-board">
-	            <h1 id="header">Memory Game Board</h1>
-	            <div id="row1"></div>
-	            <div id="row2"></div>
-	            <div id="row3"></div>
-	            <div id="row4"></div>
-	        </div>
-	        <div class="col-md-3 col-sm-12" id="stats">
-	        	<h2>Timer</h2>
-	        		<p id="timer">0</p>
-	        	<h2>Matches Made</h2>
-	        		<p id="matches">0</p>
-	        	<h2>Matches Left</h2>
-	        		<p id="remaining">8</p>
-	        	<h2>Incorrect Attempts</h2>
-	        		<p id="incorrect">0</p>
+	        <div class="col-sm-12" id="totalGame">
+				<div class="col-sm-offset-1 col-md-6 col-sm-8" id="game-board">
+		            <h1 id="header">Memory Game Board</h1>
+		            <div id="row1"></div>
+		            <div id="row2"></div>
+		            <div id="row3"></div>
+		            <div id="row4"></div>
+		        </div>
+		        <div class="col-sm-4" id="stats">
+		        	<button type="button" id="startOver" class="btn btn-lg btn-primary">Start Over</button>
+		        	<h2>Timer</h2>
+		        		<p id="timer">0</p>
+		        	<h2>Matches Made</h2>
+		        		<p id="matches">0</p>
+		        	<h2>Matches Left</h2>
+		        		<p id="remaining">8</p>
+		        	<h2>Incorrect Attempts</h2>
+		        		<p id="incorrect">0</p>
+		        	<a tabindex="0" id="rules" class="btn btn-lg btn-default" role="button" data-trigger="focus" data-placement="top" title="How to play" data-content="The game starts with a grid of 16 tiles turned face down. Each card has a duplicate, so there are 8 matching pairs randomly distributed in the grid. Click or tap two tiles at a time trying to find matching pairs. If the two tiles match, they will remain turned over. If they don't, both tiles are flipped back over and you try again. The game ends when all pairs have been matched. Good luck!">How To Play</a>
+		        </div>	        
 	        </div>
     	</main>
+
+        <div class="modal fade" id="winner-modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">You're A Winner!</h4>
+              </div>
+              <div class="modal-body">
+                <p>Winner, winner, chicken dinner! What do you want to do now?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="play-again">Play Again?</button>
+                <button type="button" class="btn btn-primary" id="celebrate-button">Celebrate!</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
         <script src="js/jquery-2.1.1.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
         <script src="js/bootstrap.js"></script>
         <script src="js/images.js"></script>
-        <script src="js/app.js"></script>    	
+        <script src="js/app.js"></script>
+        <script src="js/solitaireVictory.js"></script>    	
 	</body>
 </html>
