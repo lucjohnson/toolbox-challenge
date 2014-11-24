@@ -1,4 +1,9 @@
+/* app.js
+	main script file for 'Memory Game' application
+*/
+
 "use strict";
+
 $(document).ready(function () {
 	var gameBoard = $('#game-board');
 	var row1 = $('#row1');
@@ -6,48 +11,25 @@ $(document).ready(function () {
 	var row3 = $('#row3');
 	var row4 = $('#row4');
 
+	// selects pictures for the gameBoard
 	var shuffled = _.shuffle(images);
 	var gameSet = shuffled.slice(0,8);
 	var fullSet = gameSet.concat(gameSet);
 	var shuffledFullSet = _.shuffle(fullSet);
 
-	$('#celebrate-button').click(function() {
-		window.location.href = 'http://www.youtube.com/watch?v=djV11Xbc914';
-	});
-
-	$('#play-again').click(function() {
-		location.reload(true);
-	});
-
-	var imgWidth;
-	var imgHeight;
-
-	function setWidth() {
+	// sizes board based on current window dimensions and finds proper image sizes
+	function setBoard() {
 		var gameWidth = $('#game-board').width();
-		imgWidth = gameWidth / 4 - 40;
-	}
-
-	function setHeight() {
 		var windowHeight = $(window).height();
 		$('#game-board').css('height', windowHeight);
-		imgHeight = windowHeight / 4 - 30;
+		if ($(window).width() > $(window).height()) {
+			imgSideLength = gameWidth / 4 - 40;
+		} else if ($(window).height() > $(window).width()) {
+			imgSideLength = windowHeight / 4 -30;
+		}
 	}
 
-	setWidth();
-	setHeight();
-
-	$(window).resize(function() {
-		setWidth();
-		setHeight();
-		if ($(window).width() > $(window).height()) {
-			$('img').css('width', imgWidth);
-			$('img').css('height', auto);
-		} else if ($(window).height() > $(window).width()) {
-			$('img').css('height', imgHeight);
-			$('img').css('width', auto);
-		}
-	})
-
+	// builds board of images in multiple rows
 	function populateRow(start, end, row) {
 		for (var i = start; i < end; i++) {
 			var newTile = $(document.createElement('img'));
@@ -58,14 +40,22 @@ $(document).ready(function () {
 			newTile.attr('src', 'img/tile-back.png')
 			var front = shuffledFullSet[i]["image"];
 			newTile.data('frontImage', front);
-			if ($(window).width() > $(window).height()) {
-				newTile.attr('width', imgWidth);
-			} else {
-				newTile.attr('height', imgHeight);
-			}
+			newTile.attr('width', imgSideLength);
+			newTile.attr('height', imgSideLength);
 			row.append(newTile);
 		}
 	}
+	
+	var imgSideLength;
+	
+	// resizes the board and images when the window is resized
+	$(window).resize(function() {
+		setBoard();
+		$('img').css('width', imgSideLength);
+		$('img').css('height', imgSideLength);
+	})
+
+	setBoard();
 
 	populateRow(0, 4, row1);
 	populateRow(4, 8, row2);
@@ -81,13 +71,15 @@ $(document).ready(function () {
 	var remaining = 8;
 	var incorrect = 0;
 
-	if (clickedImages <= 2) {
+	// defines gameplay and tile reaction based on user clicks
+	if (clickedImages <= 2) { // if statement to prevent clicking more than two tiles per turn
 		$('#game-board img').click(function() {
 			clickedImages++;
 
+			// "flips" tiles 
 			if (clickedImages == 1) {
 				firstImage = $(this);
-				if (firstImage.hasClass('matched')) {
+				if (firstImage.hasClass('matched')) { // game does not count clicks on matched tiles
 					clickedImages--;
 				} else {
 					firstImageData = firstImage.data('frontImage');
@@ -104,6 +96,7 @@ $(document).ready(function () {
 				}
 			}
 
+			// defines behavior for matches and non-matches
 			if (firstImageData == secondImageData 
 				&& firstImage.data('tileNumber') != secondImage.data('tileNumber')
 				&& clickedImages == 2) {
@@ -123,9 +116,13 @@ $(document).ready(function () {
 				secondImageData = secondImage.data('backImage');
 				incorrect++;
 			} 
+			
+			// updates stats to the user
 			$('#matches').text(matches);
 			$('#remaining').text(remaining);
 			$('#incorrect').text(incorrect);
+			
+			// game behavior when user wins
 			if (remaining == 0) {
 				clearInterval(time);
 				$('#game-board img').solitaireVictory();
@@ -136,6 +133,7 @@ $(document).ready(function () {
 
 	var time;
 
+	// starts the timer after user clicks on board once
 	$('#game-board').one("click", function () {
 		var startTime = _.now();
 		time = setInterval(function() {
@@ -143,13 +141,26 @@ $(document).ready(function () {
 		}, 1000);
 	});
 
+	// starts a new game by refreshing page
 	$('#startOver').click(function() {
 		location.reload(true);
 	});
 
+	// activates how to play popover
 	$('#rules').click(function() {
 		$('#rules').popover('show');
 	});
-}); // $(onReady);
+
+	// button for winner modal
+	$('#celebrate-button').click(function() {
+		window.location.href = 'http://www.youtube.com/watch?v=djV11Xbc914';
+	});
+
+	// button for winner modal
+	$('#play-again').click(function() {
+		location.reload(true);
+	});
+
+}); // $(document).ready();
 
 

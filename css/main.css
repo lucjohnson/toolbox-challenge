@@ -1,7 +1,9 @@
+/* fonts */
 @import url(http://fonts.googleapis.com/css?family=Orbitron);
 @import url(http://fonts.googleapis.com/css?family=Raleway);
 @import url(http://fonts.googleapis.com/css?family=Michroma);
 
+/* basic elements */
 body {
 	font-family: 'Raleway', sans-serif;
 	background-image: url('../img/Brick_Wall.jpg');
@@ -16,6 +18,16 @@ h1 {
 	font-size: 48px;
 }
 
+img {
+	border: 5px solid rgba(255,255,255,0.7);
+	cursor: pointer;
+}
+
+img:hover {
+	border: 5px solid #4b2e83; /*UW Purple*/
+}
+
+/* specific divs */
 #game-board {
 	padding-left: 0;
 	padding-right: 0;
@@ -26,12 +38,12 @@ h1 {
 }
 
 .btn-primary {
-	background-color: #4b2e83;
+	background-color: #4b2e83; /*UW Purple*/
 	color: white;
 }
 
 .btn-default {
-	background-color: rgb(232,211,162);
+	background-color: rgb(232,211,162); /*UW Gold*/
 	color: white;
 }
 
@@ -39,17 +51,8 @@ h1 {
 	background-color: rgba(255,255,255,0.8);
 }
 
-img {
-	border: 5px solid rgba(255,255,255,0.7);
-	cursor: pointer;
-}
-
-img:hover {
-	border: 5px solid #4b2e83;
-}
-
 .matched {
-	border-color: rgba(232,211,162,0.8);
+	border-color: rgba(232,211,162,0.8); /*UW Gold*/
 	cursor: default;
 }
 
@@ -62,9 +65,14 @@ img:hover {
 	font-size: 175%;
 }
 
+/* formatting for smaller screens */
 @media (max-width: 992px) {
-	h1 {
-		font-size: 200%;
+	#title {
+		display: none;
+	}
+
+	#game-board {
+		padding-top: 5%;
 	}
 
 	h2 {
